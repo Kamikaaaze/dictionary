@@ -30,6 +30,7 @@ else if( response.data[0]?.phonetics[0]?.text){
 }
 const keyWord= ()=>{
 setKeyword(userInput);
+const Icons= response.data[0].phonetics[0].text;//error
 }
 
   return (
@@ -46,7 +47,7 @@ setKeyword(userInput);
             <p className="phonetic">{phonetics}</p>
           </div>
 
-          <p>Icons</p>
+          <p>{Icons}</p> //error//
         </div>
         <div className="nounDiv">
           <p>noun</p>
