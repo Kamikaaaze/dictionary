@@ -8,29 +8,39 @@ function App() {
   const [userInput, setUserInput] = useState("");
   const [keyword, setKeyword] = useState("Dictionary");
   const [phonetics, setPhonetics] = useState("/ˈdɪkʃəˌnɛɹi/");
-  const [meaning, setMeaning] = useState(
-    ['A reference work with a list of words from one or …onunciation, usage, translations, and other data.',
-' A synchronic dictionary of a sta…ain words that are properly part of the language.'
-
-  ])
+  const [meaning, setMeaning] = useState([
+    "A reference work with a list of words from one or …onunciation, usage, translations, and other data.",
+    " A synchronic dictionary of a sta…ain words that are properly part of the language.",
+  ]);
+  const [synonymn,setSynonymn] = useState(['wordbook']);
 
   //phonetics fetching//
   const search = async () => {
-    setPhonetics("not available...");
-    //setMeaning("not available");
+    
     try {
       const response = await axios.get(
         `https://api.dictionaryapi.dev/api/v2/entries/en/${userInput}`
       );
       console.log(response.data);
-      if (response.data[0]?.phonetics[1]?.text) {
-        setPhonetics(response.data[0].phonetics[1].text);
-      } else if (response.data[0]?.phonetics[0]?.text) {
-        setPhonetics(response.data[0].phonetics[0].text);
-      }
+      setPhonetics(response.data[0].phonetic);
+      console.log(response.data[0].meanings);
+
+      if (response.data[0]?.meanings[0]?.definitions.length > 0) {
+        setMeaning(
+          response.data[0]?.meanings[0]?.definitions.map(
+            (data) => data.definition
+          )
+        );
+      }else setMeaning("not available")
+
+      if(response.data[0]?.meanings[0]?.synonyms.length>0){
+        setSynonymn(response.data[0].meanings[0].synonyms)
+      }else setSynonymn(["not available"])
     } catch (error) {
       console.log(error);
       setPhonetics("not available...");
+      setMeaning(["not available"]);
+      setSynonymn(["not available"])
     }
   };
   const keyWord = () => {
@@ -49,6 +59,7 @@ function App() {
             placeholder="Type here.."
             className="search-box"
             type="text"
+            defaultValue={"Dictionary"}
           />
           <button
             onClick={() => {
@@ -67,20 +78,23 @@ function App() {
 
           <p>Icons</p>
         </div>
-        <div className="nounDiv">
+        <div className="meaningDiv">
           <p>noun</p>
           <p>Meaning</p>
           <div className="bullets">
-            {
-              meaning.slice(0,3).map((item,index)=>{
-               return  <p key={index}>{item}</p>;
-              })
-            }
-           
+             {meaning.slice(0,3).map((item, index) => {
+              return <p key={index}>{item}</p>;
+            })}      
+          
           </div>
           <div className="synonymDiv">
             <p>Synonym</p>
-            <p>Classic keyboard</p>
+            {
+              synonymn.slice(0,2).map(
+                (synonym,index)=>(<p key={index}>{synonym}</p>)
+              )
+            }
+         
           </div>
           <div className="nounDiv">
             <p>verb</p>
