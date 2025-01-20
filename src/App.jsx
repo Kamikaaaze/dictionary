@@ -12,18 +12,19 @@ function App() {
     "A reference work with a list of words from one or …onunciation, usage, translations, and other data.",
     " A synchronic dictionary of a sta…ain words that are properly part of the language.",
   ]);
-  const [synonymn,setSynonymn] = useState(['wordbook']);
+  const [synonymn, setSynonymn] = useState(["wordbook"]);
+  const [verb, setVerb] = useState("sample example for verb statement");
+  const [nounEg,setNounEg] = useState("sample example here...")
 
   //phonetics fetching//
   const search = async () => {
-    
     try {
       const response = await axios.get(
         `https://api.dictionaryapi.dev/api/v2/entries/en/${userInput}`
       );
       console.log(response.data);
       setPhonetics(response.data[0].phonetic);
-      console.log(response.data[0].meanings);
+    
 
       if (response.data[0]?.meanings[0]?.definitions.length > 0) {
         setMeaning(
@@ -31,16 +32,25 @@ function App() {
             (data) => data.definition
           )
         );
-      }else setMeaning("not available")
+      } else setMeaning("not available");
 
-      if(response.data[0]?.meanings[0]?.synonyms.length>0){
-        setSynonymn(response.data[0].meanings[0].synonyms)
-      }else setSynonymn(["not available"])
+      if (response.data[0]?.meanings[0]?.synonyms.length > 0) {
+        setSynonymn(response.data[0].meanings[0].synonyms);
+      } else setSynonymn(["not available"]);
+
+      if (response.data[0]?.meanings[1]?.definitions.length > 0) {
+        setVerb(response.data[0]?.meanings[1]?.definitions[0].definition);
+      }else setVerb("not available");
+
+      // if(response.data[0]?.meanings[1]?.){
+
+      // }else setNounEg("not available");
     } catch (error) {
       console.log(error);
       setPhonetics("not available...");
       setMeaning(["not available"]);
-      setSynonymn(["not available"])
+      setSynonymn(["not available"]);
+      setVerb("not available");
     }
   };
   const keyWord = () => {
@@ -82,26 +92,22 @@ function App() {
           <p>noun</p>
           <p>Meaning</p>
           <div className="bullets">
-             {meaning.slice(0,3).map((item, index) => {
+            {meaning.slice(0, 3).map((item, index) => {
               return <p key={index}>{item}</p>;
-            })}      
-          
+            })}
           </div>
           <div className="synonymDiv">
             <p>Synonym</p>
-            {
-              synonymn.slice(0,2).map(
-                (synonym,index)=>(<p key={index}>{synonym}</p>)
-              )
-            }
-         
+            {synonymn.slice(0, 2).map((synonym, index) => (
+              <p key={index}>{synonym}</p>
+            ))}
           </div>
           <div className="nounDiv">
             <p>verb</p>
             <p>Meaning</p>
             <div className="bullets">
-              <p>this meaning is called the meaning of life behind it</p>
-              <p className="example">this p tag should not be bulleted</p>
+              <p>{verb}</p>
+              <p className="example">{nounEg}</p>
             </div>
           </div>
         </div>
