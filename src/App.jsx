@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
 
-
-
 function App() {
   const [userInput, setUserInput] = useState("Dictionary");
   const [keyword, setKeyword] = useState("Dictionary");
@@ -111,15 +109,13 @@ function App() {
   }, []);
   return (
     <div className="mainDiv">
-      
       <div className="card">
         <div className="iconsDiv">
-        
-        <i class="fa-solid fa-book fa-xl"></i>
+          <i class="fa-solid fa-book fa-xl"></i>
           <div className="rightIcons">
             <div className="vertical-line"></div>
-          <i class="fa-solid fa-toggle-on fa-xl"></i>
-          <i class="fa-regular fa-moon fa-xl"></i>
+            <i class="fa-solid fa-toggle-on fa-xl"></i>
+            <i class="fa-regular fa-moon fa-xl"></i>
           </div>
         </div>
         <div className="inputDiv">
@@ -127,20 +123,18 @@ function App() {
             onChange={(e) => {
               setUserInput(e.target.value);
             }}
-           
             className="search-box"
             type="text"
             value={userInput}
           />
-          
-          <i class="fa-solid fa-magnifying-glass"
-         
-           onClick={() => {
-            search();
-            keyWord();
-          }}
-          ></i>
 
+          <i
+            class="fa-solid fa-magnifying-glass"
+            onClick={() => {
+              search();
+              keyWord();
+            }}
+          ></i>
         </div>
         <div className="wordDiv">
           <div className="wordDivLeft">
@@ -148,10 +142,14 @@ function App() {
             <p className="phonetic">{phonetics}</p>
           </div>
 
-          <p>Icons</p>
+          <i class="fa-solid fa-circle-play fa-4x"></i>
         </div>
         <div className="meaningDiv">
-          <p className="heading">noun</p>
+          <div className="nounTitle">
+            <p className="heading">noun</p>
+            <div className="horizontalLine"></div>
+          </div>
+
           <p className="subHeading">Meaning</p>
           <div className="bullets">
             {meaning.slice(0, 3).map((item, index) => {
@@ -161,11 +159,17 @@ function App() {
           <div className="synonymDiv">
             <p className="subHeading">Synonym</p>
             {synonymn.slice(0, 2).map((synonym, index) => (
-              <p className="synonymn" key={index}>{synonym}</p>
+              <p className="synonymn" key={index}>
+                {synonym}
+              </p>
             ))}
           </div>
           <div className="nounDiv">
-            <p className="heading">verb</p>
+            <div className="verbTitle">
+              <p className="heading">verb</p>
+              <div className="horizontalLine"></div>
+            </div>
+
             <p className="subHeading">Meaning</p>
             <div className="bullets">
               <p>{verb}</p>
