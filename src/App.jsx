@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import axios from "axios";
+
+
 
 function App() {
   const [userInput, setUserInput] = useState("Dictionary");
@@ -111,8 +111,17 @@ function App() {
   }, []);
   return (
     <div className="mainDiv">
+      
       <div className="card">
-        <div className="iconsDiv">icon</div>
+        <div className="iconsDiv">
+        
+        <i class="fa-solid fa-book fa-xl"></i>
+          <div className="rightIcons">
+            <div className="vertical-line"></div>
+          <i class="fa-solid fa-toggle-on fa-xl"></i>
+          <i class="fa-regular fa-moon fa-xl"></i>
+          </div>
+        </div>
         <div className="inputDiv">
           <input
             onChange={(e) => {
@@ -123,14 +132,15 @@ function App() {
             type="text"
             value={userInput}
           />
-          <button
-            onClick={() => {
-              search();
-              keyWord();
-            }}
-          >
-            GO
-          </button>
+          
+          <i class="fa-solid fa-magnifying-glass"
+         
+           onClick={() => {
+            search();
+            keyWord();
+          }}
+          ></i>
+
         </div>
         <div className="wordDiv">
           <div className="wordDivLeft">
@@ -141,22 +151,22 @@ function App() {
           <p>Icons</p>
         </div>
         <div className="meaningDiv">
-          <p>noun</p>
-          <p>Meaning</p>
+          <p className="heading">noun</p>
+          <p className="subHeading">Meaning</p>
           <div className="bullets">
             {meaning.slice(0, 3).map((item, index) => {
               return <p key={index}>{item}</p>;
             })}
           </div>
           <div className="synonymDiv">
-            <p>Synonym</p>
+            <p className="subHeading">Synonym</p>
             {synonymn.slice(0, 2).map((synonym, index) => (
-              <p key={index}>{synonym}</p>
+              <p className="synonymn" key={index}>{synonym}</p>
             ))}
           </div>
           <div className="nounDiv">
-            <p>verb</p>
-            <p>Meaning</p>
+            <p className="heading">verb</p>
+            <p className="subHeading">Meaning</p>
             <div className="bullets">
               <p>{verb}</p>
               <p className="example">{nounEg}</p>
@@ -165,7 +175,7 @@ function App() {
         </div>
 
         <div className="source">
-          <p>Source</p>
+          <p className="subHeading">Source</p>
           <a href={link} target="_blank" rel="no opener no referrer">
             {link}
           </a>

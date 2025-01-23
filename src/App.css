@@ -1,16 +1,17 @@
-body{
+body {
   margin: 0;
   padding: 0;
-  
 }
-p{
-  font-family: sans-serif;
+p {
+  font-family: "Lora", sans-serif;
+  font-style: normal;
+  font-weight: 400;
 }
 @font-face {
-  font-family: 'ArcoPerpetuo';
-  src: url('./fonts/ArcoPerpetuo-Regular.ttf');
+  font-family: "ArcoPerpetuo";
+  src: url("./fonts/ArcoPerpetuo-Regular.ttf");
 }
-.mainDiv{
+.mainDiv {
   width: 100%;
   height: 100%;
   display: flex;
@@ -18,7 +19,37 @@ p{
   align-items: center;
   justify-content: center;
 }
-.card{
+.iconsDiv {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 50px;
+  align-items: center;
+}
+.fa-solid.fa-book.fa-xl {
+  color: rgb(93, 93, 93);
+  cursor: pointer;
+}
+.rightIcons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.vertical-line {
+  width: 0.5px;
+  height: 25px;
+  background-color: rgb(171, 171, 171);
+}
+.fa-solid.fa-toggle-on.fa-xl {
+  color: rgb(93, 93, 93);
+  cursor: pointer;
+  margin-left: 10px;
+}
+.fa-regular.fa-moon.fa-xl {
+  color: rgb(93, 93, 93);
+  cursor: pointer;
+}
+.card {
   width: 550px;
   display: flex;
   flex-direction: column;
@@ -26,7 +57,12 @@ p{
   justify-content: center;
   margin-top: 100px;
 }
-.search-box{
+.inputDiv {
+  display: flex;
+  align-items: baseline;
+  position: relative;
+}
+.search-box {
   width: 550px;
   height: 45px;
   box-sizing: border-box;
@@ -35,53 +71,76 @@ p{
   padding-left: 10px;
   margin-bottom: 15px;
   background-color: rgb(244, 244, 244);
-  margin-top: 40px;
- font-family:  "Lora", serif; 
- font-weight: 900;
+  /* margin-top: 40px; */
+  font-family: "Lora", serif;
+  font-weight: 900;
+}
+.fa-solid.fa-magnifying-glass {
+  color: rgb(144, 47, 213);
+  position: absolute;
+  top: 15px;
+  left: 515px;
+  cursor: pointer;
 }
 
-.wordDiv{
+.wordDiv {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  align-items:flex-start;
+  align-items: flex-start;
   height: 120px;
 }
-.keyWord{
-  font-family:  "Lora", serif;
+.keyWord {
+  font-family: "Lora", serif;
   font-size: 45px;
   font-weight: 700;
   margin-bottom: 2px;
   margin-top: 0;
 }
-.phonetic{
+.phonetic {
   color: rgb(144, 47, 213);
-  font-family: 'ArcoPerpetuo';
+  font-family: "ArcoPerpetuo";
 }
 .bullets p {
   padding-left: 30px;
-position: relative;
+  position: relative;
 }
-.bullets p:not(.example)::before{
-  position:absolute;
-  content: '\2022';
+.bullets p:not(.example)::before {
+  position: absolute;
+  content: "\2022";
   left: 12px;
   color: rgb(169, 69, 239);
 }
-.synonymDiv{
+.synonymDiv {
   display: flex;
   gap: 20px;
+  align-items: baseline;
 }
-.source{
+.source {
   width: 100%;
   display: flex;
   justify-content: flex-start;
   gap: 20px;
   align-items: baseline;
 }
-.meaningDiv{
+.meaningDiv {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   width: 100%;
+}
+.heading {
+  font-family: "Lora", serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 20px;
+}
+.subHeading {
+  color: rgb(139, 137, 137);
+  font-weight: 500;
+}
+.synonymn {
+  font-family: "Lora", sans-serif;
+  font-weight: 700;
+  color: rgb(144, 47, 213);
 }
