@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
 
+
 function App() {
   const [userInput, setUserInput] = useState("Dictionary");
   const [keyword, setKeyword] = useState("Dictionary");
@@ -14,6 +15,7 @@ function App() {
   const [verb, setVerb] = useState("To look up in a dictionary.");
   const [nounEg, setNounEg] = useState("");
   const [link, setLink] = useState("https://en.wiktionary.org/wiki/dictionary");
+  const [audio,setAudio] = useState("https://api.dictionaryapi.dev/media/pronunciations/en/dictionary-uk.mp3")
 
   //API FETCHING //
   const search = async () => {
@@ -46,6 +48,11 @@ function App() {
         setNounEg(response.data[2]?.meanings[0]?.definitions[0].example);
       } else setNounEg("");
 
+      if (response.data[0]?.phonetics.length>0) {
+       
+        setAudio(response.data[0].phonetics[0].audio);
+      } else setAudio("");
+
       if (response.data[0]?.sourceUrls) {
         setLink(response.data[0]?.sourceUrls);
       } else setLink("...");
@@ -56,6 +63,7 @@ function App() {
       setSynonymn(["not available"]);
       setVerb("not available");
       setNounEg("error");
+      setAudio("no audio");
     }
   };
   const keyWord = () => {
@@ -142,7 +150,8 @@ function App() {
             <p className="phonetic">{phonetics}</p>
           </div>
 
-          <i class="fa-solid fa-circle-play fa-4x"></i>
+          <i class="fa-solid fa-circle-play fa-4x" onClick={()=> new Audio(audio).play()}></i>
+       
         </div>
         <div className="meaningDiv">
           <div className="nounTitle">
